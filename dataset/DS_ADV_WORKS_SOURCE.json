@@ -1,0 +1,13 @@
+{
+	"name": "DS_ADV_WORKS_SOURCE",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_ADVWORKS",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

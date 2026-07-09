@@ -1,0 +1,19 @@
+{
+	"name": "PIP_SSMS_Fetch_Table",
+	"properties": {
+		"activities": [
+			{
+				"name": "Wait1",
+				"type": "Wait",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"waitTimeInSeconds": 1
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2026-07-08T16:20:28Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

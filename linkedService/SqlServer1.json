@@ -1,0 +1,21 @@
+{
+	"name": "SqlServer1",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "SqlServer",
+		"typeProperties": {
+			"server": "DESKTOP-U35BAFM\\SQLEXPRESS",
+			"database": "Joins",
+			"encrypt": "optional",
+			"trustServerCertificate": false,
+			"authenticationType": "SQL",
+			"userName": "chandu441",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiI1YWE5YTdhOS01Njc4LTQ1NGMtOWIwZC03ZTM0MDQ3M2Y5MzYiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+		},
+		"connectVia": {
+			"referenceName": "integrationRuntimeABB",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

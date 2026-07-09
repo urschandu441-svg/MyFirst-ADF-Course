@@ -1,0 +1,15 @@
+{
+	"name": "ADF-ABB",
+	"properties": {
+		"trustModeClaimForMi": {
+			"value": "Disabled",
+			"editable": true
+		}
+	},
+	"location": "centralindia",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "0632f62b-fab6-4adf-9ab2-aa63e2db15c5",
+		"tenantId": "bc0bc02c-8ba2-46cf-bcc3-50d18e667a37"
+	}
+}

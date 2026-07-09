@@ -1,0 +1,64 @@
+{
+	"name": "pip_seed_filter_using_lookup",
+	"properties": {
+		"activities": [
+			{
+				"name": "Seed_Filter",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"dataset": {
+						"referenceName": "DS_BLOBCSV_1",
+						"type": "DatasetReference"
+					},
+					"firstRowOnly": false
+				}
+			},
+			{
+				"name": "Filter1",
+				"type": "Filter",
+				"dependsOn": [
+					{
+						"activity": "Seed_Filter",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@activity('Seed_Filter').output.value",
+						"type": "Expression"
+					},
+					"condition": {
+						"value": "@or(\n    equals(item().SIC_Code, '1110'),\n    equals(item().SIC_Code, '1230')\n)\n\n",
+						"type": "Expression"
+					}
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2026-07-09T11:50:46Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

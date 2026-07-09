@@ -1,0 +1,19 @@
+{
+	"name": "DS_CSV_SINK_Exist",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LinkService_DL",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "csvfiles",
+				"fileSystem": "destination"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

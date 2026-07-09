@@ -1,0 +1,44 @@
+{
+	"name": "PL_SSMS_Store_Procedure",
+	"properties": {
+		"activities": [
+			{
+				"name": "SSMS_Store_Procedure",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[dbo].[InsertCustomerDetails]",
+					"storedProcedureParameters": {
+						"CustID": {
+							"value": "1001",
+							"type": "Int32"
+						},
+						"CustName": {
+							"value": "Chandu",
+							"type": "String"
+						},
+						"LastName": {
+							"value": "Lee",
+							"type": "String"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "LS_SSMS_SINK",
+					"type": "LinkedServiceReference"
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2026-07-06T15:09:02Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}
