@@ -1,0 +1,60 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "ADF-ABB"
+		},
+		"LS_ADVWORKS_password": {
+			"value": ""
+		},
+		"LS_BLOBTXT_connectionString": {
+			"value": ""
+		},
+		"LS_SSMS_SINK_password": {
+			"value": ""
+		},
+		"LinkService_DL_accountKey": {
+			"value": ""
+		},
+		"SqlServer1_password": {
+			"value": ""
+		},
+		"HttpsTestLink_properties_typeProperties_url": {
+			"value": "https://raw.githubusercontent.com"
+		},
+		"LS_ADVWORKS_properties_typeProperties_server": {
+			"value": "DESKTOP-U35BAFM\\SQLEXPRESS"
+		},
+		"LS_ADVWORKS_properties_typeProperties_database": {
+			"value": "AdventureWorks2025"
+		},
+		"LS_ADVWORKS_properties_typeProperties_userName": {
+			"value": "chandu441"
+		},
+		"LS_RestResource_properties_typeProperties_url": {
+			"value": "https://retoolapi.dev/5yDVOt/data"
+		},
+		"LS_SSMS_SINK_properties_typeProperties_server": {
+			"value": "DESKTOP-U35BAFM\\SQLEXPRESS"
+		},
+		"LS_SSMS_SINK_properties_typeProperties_database": {
+			"value": "VisionBoardDataMigration"
+		},
+		"LS_SSMS_SINK_properties_typeProperties_userName": {
+			"value": "chandu441"
+		},
+		"LinkService_DL_properties_typeProperties_url": {
+			"value": "https://abb2storage.dfs.core.windows.net/"
+		},
+		"SqlServer1_properties_typeProperties_server": {
+			"value": "DESKTOP-U35BAFM\\SQLEXPRESS"
+		},
+		"SqlServer1_properties_typeProperties_database": {
+			"value": "Joins"
+		},
+		"SqlServer1_properties_typeProperties_userName": {
+			"value": "chandu441"
+		}
+	}
+}

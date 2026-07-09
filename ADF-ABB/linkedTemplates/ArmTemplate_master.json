@@ -1,0 +1,181 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "ADF-ABB"
+		},
+		"LS_ADVWORKS_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'LS_ADVWORKS'"
+		},
+		"LS_BLOBTXT_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'LS_BLOBTXT'"
+		},
+		"LS_SSMS_SINK_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'LS_SSMS_SINK'"
+		},
+		"LinkService_DL_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'LinkService_DL'"
+		},
+		"SqlServer1_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'SqlServer1'"
+		},
+		"HttpsTestLink_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://raw.githubusercontent.com"
+		},
+		"LS_ADVWORKS_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "DESKTOP-U35BAFM\\SQLEXPRESS"
+		},
+		"LS_ADVWORKS_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "AdventureWorks2025"
+		},
+		"LS_ADVWORKS_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "chandu441"
+		},
+		"LS_RestResource_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://retoolapi.dev/5yDVOt/data"
+		},
+		"LS_SSMS_SINK_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "DESKTOP-U35BAFM\\SQLEXPRESS"
+		},
+		"LS_SSMS_SINK_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "VisionBoardDataMigration"
+		},
+		"LS_SSMS_SINK_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "chandu441"
+		},
+		"LinkService_DL_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://abb2storage.dfs.core.windows.net/"
+		},
+		"SqlServer1_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "DESKTOP-U35BAFM\\SQLEXPRESS"
+		},
+		"SqlServer1_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "Joins"
+		},
+		"SqlServer1_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "chandu441"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "ADF-ABB_ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"LS_BLOBTXT_connectionString": {
+						"value": "[parameters('LS_BLOBTXT_connectionString')]"
+					},
+					"LinkService_DL_accountKey": {
+						"value": "[parameters('LinkService_DL_accountKey')]"
+					},
+					"HttpsTestLink_properties_typeProperties_url": {
+						"value": "[parameters('HttpsTestLink_properties_typeProperties_url')]"
+					},
+					"LS_RestResource_properties_typeProperties_url": {
+						"value": "[parameters('LS_RestResource_properties_typeProperties_url')]"
+					},
+					"LinkService_DL_properties_typeProperties_url": {
+						"value": "[parameters('LinkService_DL_properties_typeProperties_url')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "ADF-ABB_ArmTemplate_1",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_1.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"LS_ADVWORKS_password": {
+						"value": "[parameters('LS_ADVWORKS_password')]"
+					},
+					"LS_SSMS_SINK_password": {
+						"value": "[parameters('LS_SSMS_SINK_password')]"
+					},
+					"SqlServer1_password": {
+						"value": "[parameters('SqlServer1_password')]"
+					},
+					"LS_ADVWORKS_properties_typeProperties_server": {
+						"value": "[parameters('LS_ADVWORKS_properties_typeProperties_server')]"
+					},
+					"LS_ADVWORKS_properties_typeProperties_database": {
+						"value": "[parameters('LS_ADVWORKS_properties_typeProperties_database')]"
+					},
+					"LS_ADVWORKS_properties_typeProperties_userName": {
+						"value": "[parameters('LS_ADVWORKS_properties_typeProperties_userName')]"
+					},
+					"LS_SSMS_SINK_properties_typeProperties_server": {
+						"value": "[parameters('LS_SSMS_SINK_properties_typeProperties_server')]"
+					},
+					"LS_SSMS_SINK_properties_typeProperties_database": {
+						"value": "[parameters('LS_SSMS_SINK_properties_typeProperties_database')]"
+					},
+					"LS_SSMS_SINK_properties_typeProperties_userName": {
+						"value": "[parameters('LS_SSMS_SINK_properties_typeProperties_userName')]"
+					},
+					"SqlServer1_properties_typeProperties_server": {
+						"value": "[parameters('SqlServer1_properties_typeProperties_server')]"
+					},
+					"SqlServer1_properties_typeProperties_database": {
+						"value": "[parameters('SqlServer1_properties_typeProperties_database')]"
+					},
+					"SqlServer1_properties_typeProperties_userName": {
+						"value": "[parameters('SqlServer1_properties_typeProperties_userName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'ADF-ABB_ArmTemplate_0')]"
+			]
+		}
+	]
+}
