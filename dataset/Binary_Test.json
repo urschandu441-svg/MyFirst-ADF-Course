@@ -1,0 +1,17 @@
+{
+	"name": "Binary_Test",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_BLOBTXT",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"container": "inputfiles"
+			}
+		}
+	}
+}
