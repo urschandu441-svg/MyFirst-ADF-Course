@@ -61,6 +61,57 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/DS_TXT_SINK')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LinkService_DL",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"target_filename": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": {
+							"value": "@dataset().target_filename",
+							"type": "Expression"
+						},
+						"folderPath": "textfiles",
+						"fileSystem": "destination"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DS_TXT_SINK_Exist')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LinkService_DL",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"folderPath": "textfiles",
+						"fileSystem": "destination"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/DS_TXT_SOURCE')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -290,40 +341,6 @@
 					"referenceName": "integrationRuntimeABB",
 					"type": "IntegrationRuntimeReference"
 				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/DS_Sales')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "LS_BLOBTXT",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"container": "inputfiles"
-					},
-					"columnDelimiter": ",",
-					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"quoteChar": "\""
-				},
-				"schema": [
-					{
-						"name": "SIC_Code",
-						"type": "String"
-					},
-					{
-						"name": "Description",
-						"type": "String"
-					}
-				]
 			},
 			"dependsOn": []
 		},
@@ -889,8 +906,10 @@
 				"lastPublishTime": "2026-07-08T13:01:19Z"
 			},
 			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/DS_TXT_SINK_Exist')]",
 				"[concat(variables('factoryId'), '/datasets/DS_XLSX_SINK_Exist')]",
-				"[concat(variables('factoryId'), '/datasets/DS_TXT_SOURCE')]"
+				"[concat(variables('factoryId'), '/datasets/DS_TXT_SOURCE')]",
+				"[concat(variables('factoryId'), '/datasets/DS_TXT_SINK')]"
 			]
 		},
 		{
@@ -1173,7 +1192,8 @@
 				"lastPublishTime": "2026-07-08T10:02:26Z"
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/DS_TXT_SOURCE')]"
+				"[concat(variables('factoryId'), '/datasets/DS_TXT_SOURCE')]",
+				"[concat(variables('factoryId'), '/datasets/DS_TXT_SINK')]"
 			]
 		},
 		{
@@ -1660,24 +1680,6 @@
 				"lastPublishTime": "2026-07-09T11:50:46Z"
 			},
 			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/DS_ADV_WORKS_SOURCE')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "LS_ADVWORKS",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "SqlServerTable",
-				"schema": [],
-				"typeProperties": {}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/LS_ADVWORKS')]"
-			]
 		}
 	]
 }
