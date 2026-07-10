@@ -3,12 +3,28 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Wait1",
-				"type": "Wait",
+				"name": "SSMS_Adventure",
+				"type": "Lookup",
 				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
 				"userProperties": [],
 				"typeProperties": {
-					"waitTimeInSeconds": 1
+					"source": {
+						"type": "SqlServerSource",
+						"sqlReaderQuery": "SELECT [AddressID]\n      ,[AddressLine1]\n      ,[AddressLine2]\n      ,[City]\n      ,[StateProvinceID]\n      ,[PostalCode]\n      ,CAST(SpatialLocation AS varchar(200)) as Location_Geography\n  FROM [AdventureWorks2025].[Person].[Address]",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "DS_ADV_WORKS_SOURCE",
+						"type": "DatasetReference"
+					}
 				}
 			}
 		],
