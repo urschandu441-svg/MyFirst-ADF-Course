@@ -1,0 +1,10 @@
+{
+	"name": "SQL_Key_Vault",
+	"properties": {
+		"annotations": [],
+		"type": "AzureKeyVault",
+		"typeProperties": {
+			"baseUrl": "https://FirstADFVault.vault.azure.net/"
+		}
+	}
+}
