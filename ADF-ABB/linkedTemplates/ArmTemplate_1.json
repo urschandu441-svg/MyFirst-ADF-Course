@@ -54,12 +54,54 @@
 		"SqlServer1_properties_typeProperties_userName": {
 			"type": "string",
 			"defaultValue": "chandu441"
+		},
+		"SqlServer2SSMS_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "DESKTOP-U35BAFM\\SQLEXPRESS"
+		},
+		"SqlServer2SSMS_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "Joins"
+		},
+		"SqlServer2SSMS_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "chandu441"
 		}
 	},
 	"variables": {
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
 	},
 	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/DS_TXT_SINK')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LinkService_DL",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"target_filename": {
+						"type": "string"
+					}
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": {
+							"value": "@dataset().target_filename",
+							"type": "Expression"
+						},
+						"folderPath": "textfiles",
+						"fileSystem": "destination"
+					}
+				}
+			},
+			"dependsOn": []
+		},
 		{
 			"name": "[concat(parameters('factoryName'), '/DS_TXT_SINK_Exist')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
@@ -305,6 +347,37 @@
 					"password": {
 						"type": "SecureString",
 						"value": "[parameters('SqlServer1_password')]"
+					}
+				},
+				"connectVia": {
+					"referenceName": "integrationRuntimeABB",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SqlServer2SSMS')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "SqlServer",
+				"typeProperties": {
+					"server": "[parameters('SqlServer2SSMS_properties_typeProperties_server')]",
+					"database": "[parameters('SqlServer2SSMS_properties_typeProperties_database')]",
+					"encrypt": "optional",
+					"trustServerCertificate": false,
+					"authenticationType": "SQL",
+					"userName": "[parameters('SqlServer2SSMS_properties_typeProperties_userName')]",
+					"password": {
+						"type": "AzureKeyVaultSecret",
+						"store": {
+							"referenceName": "AzureKeyVault3339",
+							"type": "LinkedServiceReference"
+						},
+						"secretName": "SSMSABB",
+						"secretVersion": "d00753b568bf48c18f395be2a044ba0d"
 					}
 				},
 				"connectVia": {
@@ -878,7 +951,8 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/DS_TXT_SINK_Exist')]",
 				"[concat(variables('factoryId'), '/datasets/DS_XLSX_SINK_Exist')]",
-				"[concat(variables('factoryId'), '/datasets/DS_TXT_SOURCE')]"
+				"[concat(variables('factoryId'), '/datasets/DS_TXT_SOURCE')]",
+				"[concat(variables('factoryId'), '/datasets/DS_TXT_SINK')]"
 			]
 		},
 		{
@@ -1161,7 +1235,8 @@
 				"lastPublishTime": "2026-07-08T10:02:26Z"
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/DS_TXT_SOURCE')]"
+				"[concat(variables('factoryId'), '/datasets/DS_TXT_SOURCE')]",
+				"[concat(variables('factoryId'), '/datasets/DS_TXT_SINK')]"
 			]
 		},
 		{
@@ -1576,144 +1651,6 @@
 				},
 				"annotations": [],
 				"lastPublishTime": "2026-07-02T20:29:56Z"
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/pip_seed_filter_using_lookup')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "Seed_Filter",
-						"type": "Lookup",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "DelimitedTextSource",
-								"storeSettings": {
-									"type": "AzureBlobStorageReadSettings",
-									"recursive": true,
-									"enablePartitionDiscovery": false
-								},
-								"formatSettings": {
-									"type": "DelimitedTextReadSettings"
-								}
-							},
-							"dataset": {
-								"referenceName": "DS_BLOBCSV_1",
-								"type": "DatasetReference",
-								"parameters": {}
-							},
-							"firstRowOnly": false
-						}
-					},
-					{
-						"name": "Filter1",
-						"type": "Filter",
-						"dependsOn": [
-							{
-								"activity": "Seed_Filter",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"items": {
-								"value": "@activity('Seed_Filter').output.value",
-								"type": "Expression"
-							},
-							"condition": {
-								"value": "@or(\n    equals(item().SIC_Code, '1110'),\n    equals(item().SIC_Code, '1230')\n)\n\n",
-								"type": "Expression"
-							}
-						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {}
-				},
-				"annotations": [],
-				"lastPublishTime": "2026-07-09T11:50:46Z"
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/pipeline1')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "Get Metadata1",
-						"type": "GetMetadata",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataset": {
-								"referenceName": "DS_Sales",
-								"type": "DatasetReference",
-								"parameters": {}
-							},
-							"fieldList": [
-								"childItems"
-							],
-							"storeSettings": {
-								"type": "AzureBlobStorageReadSettings",
-								"recursive": true,
-								"enablePartitionDiscovery": false
-							},
-							"formatSettings": {
-								"type": "DelimitedTextReadSettings"
-							}
-						}
-					},
-					{
-						"name": "Filter1",
-						"type": "Filter",
-						"dependsOn": [
-							{
-								"activity": "Get Metadata1",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"items": {
-								"value": "@activity('Get Metadata1').output.childItems",
-								"type": "Expression"
-							},
-							"condition": {
-								"value": "@equals(item().name,'Sales.csv')",
-								"type": "Expression"
-							}
-						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {}
-				},
-				"annotations": []
 			},
 			"dependsOn": []
 		}

@@ -20,6 +20,9 @@
 		"SqlServer1_password": {
 			"value": ""
 		},
+		"AzureKeyVault3339_properties_typeProperties_baseUrl": {
+			"value": "https://ABBKeyVault123.vault.azure.net/"
+		},
 		"HttpsTestLink_properties_typeProperties_url": {
 			"value": "https://raw.githubusercontent.com"
 		},
@@ -54,6 +57,15 @@
 			"value": "Joins"
 		},
 		"SqlServer1_properties_typeProperties_userName": {
+			"value": "chandu441"
+		},
+		"SqlServer2SSMS_properties_typeProperties_server": {
+			"value": "DESKTOP-U35BAFM\\SQLEXPRESS"
+		},
+		"SqlServer2SSMS_properties_typeProperties_database": {
+			"value": "Joins"
+		},
+		"SqlServer2SSMS_properties_typeProperties_userName": {
 			"value": "chandu441"
 		},
 		"containerUri": {
