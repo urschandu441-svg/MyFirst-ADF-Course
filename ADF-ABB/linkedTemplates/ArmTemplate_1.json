@@ -61,36 +61,6 @@
 	},
 	"resources": [
 		{
-			"name": "[concat(parameters('factoryName'), '/DS_TXT_SINK')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "LinkService_DL",
-					"type": "LinkedServiceReference"
-				},
-				"parameters": {
-					"target_filename": {
-						"type": "string"
-					}
-				},
-				"annotations": [],
-				"type": "Binary",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobFSLocation",
-						"fileName": {
-							"value": "@dataset().target_filename",
-							"type": "Expression"
-						},
-						"folderPath": "textfiles",
-						"fileSystem": "destination"
-					}
-				}
-			},
-			"dependsOn": []
-		},
-		{
 			"name": "[concat(parameters('factoryName'), '/DS_TXT_SINK_Exist')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -908,8 +878,7 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/DS_TXT_SINK_Exist')]",
 				"[concat(variables('factoryId'), '/datasets/DS_XLSX_SINK_Exist')]",
-				"[concat(variables('factoryId'), '/datasets/DS_TXT_SOURCE')]",
-				"[concat(variables('factoryId'), '/datasets/DS_TXT_SINK')]"
+				"[concat(variables('factoryId'), '/datasets/DS_TXT_SOURCE')]"
 			]
 		},
 		{
@@ -1192,8 +1161,7 @@
 				"lastPublishTime": "2026-07-08T10:02:26Z"
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/DS_TXT_SOURCE')]",
-				"[concat(variables('factoryId'), '/datasets/DS_TXT_SINK')]"
+				"[concat(variables('factoryId'), '/datasets/DS_TXT_SOURCE')]"
 			]
 		},
 		{
@@ -1678,6 +1646,74 @@
 				},
 				"annotations": [],
 				"lastPublishTime": "2026-07-09T11:50:46Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/pipeline1')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Get Metadata1",
+						"type": "GetMetadata",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataset": {
+								"referenceName": "DS_Sales",
+								"type": "DatasetReference",
+								"parameters": {}
+							},
+							"fieldList": [
+								"childItems"
+							],
+							"storeSettings": {
+								"type": "AzureBlobStorageReadSettings",
+								"recursive": true,
+								"enablePartitionDiscovery": false
+							},
+							"formatSettings": {
+								"type": "DelimitedTextReadSettings"
+							}
+						}
+					},
+					{
+						"name": "Filter1",
+						"type": "Filter",
+						"dependsOn": [
+							{
+								"activity": "Get Metadata1",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"items": {
+								"value": "@activity('Get Metadata1').output.childItems",
+								"type": "Expression"
+							},
+							"condition": {
+								"value": "@equals(item().name,'Sales.csv')",
+								"type": "Expression"
+							}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"annotations": []
 			},
 			"dependsOn": []
 		}
