@@ -1,0 +1,28 @@
+{
+	"name": "SqlServer2SSMS",
+	"properties": {
+		"annotations": [],
+		"type": "SqlServer",
+		"typeProperties": {
+			"server": "DESKTOP-U35BAFM\\SQLEXPRESS",
+			"database": "Joins",
+			"encrypt": "optional",
+			"trustServerCertificate": false,
+			"authenticationType": "SQL",
+			"userName": "chandu441",
+			"password": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "AzureKeyVault3339",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "SSMSABB",
+				"secretVersion": "d00753b568bf48c18f395be2a044ba0d"
+			}
+		},
+		"connectVia": {
+			"referenceName": "integrationRuntimeABB",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

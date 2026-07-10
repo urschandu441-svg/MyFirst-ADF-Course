@@ -1,0 +1,10 @@
+{
+	"name": "AzureKeyVault3339",
+	"properties": {
+		"annotations": [],
+		"type": "AzureKeyVault",
+		"typeProperties": {
+			"baseUrl": "https://ABBKeyVault123.vault.azure.net/"
+		}
+	}
+}
