@@ -6,7 +6,7 @@
 		"typeProperties": {
 			"server": "DESKTOP-U35BAFM\\SQLEXPRESS",
 			"database": "Joins",
-			"encrypt": "mandatory",
+			"encrypt": "optional",
 			"trustServerCertificate": false,
 			"authenticationType": "SQL",
 			"userName": "chandu441",
@@ -16,7 +16,8 @@
 					"referenceName": "AzureKeyVault3339",
 					"type": "LinkedServiceReference"
 				},
-				"secretName": "SSMSABB"
+				"secretName": "SSMSABB",
+				"secretVersion": "d00753b568bf48c18f395be2a044ba0d"
 			}
 		},
 		"connectVia": {
