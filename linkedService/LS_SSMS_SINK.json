@@ -1,6 +1,5 @@
 {
 	"name": "LS_SSMS_SINK",
-	"type": "Microsoft.DataFactory/factories/linkedservices",
 	"properties": {
 		"annotations": [],
 		"type": "SqlServer",
@@ -11,11 +10,20 @@
 			"trustServerCertificate": false,
 			"authenticationType": "SQL",
 			"userName": "chandu441",
-			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiIyNzFmMjRjMy1lNDg0LTQzNmYtYThkZi0xOGQxMDM2ZWFmZmIiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+			"password": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "AzureKeyVault3339",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "SSMSABB",
+				"secretVersion": "d00753b568bf48c18f395be2a044ba0d"
+			}
 		},
 		"connectVia": {
 			"referenceName": "integrationRuntimeABB",
 			"type": "IntegrationRuntimeReference"
 		}
-	}
+	},
+	"type": "Microsoft.DataFactory/factories/linkedservices"
 }
