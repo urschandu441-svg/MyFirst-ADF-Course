@@ -1,0 +1,36 @@
+{
+	"name": "Parent Pipeline Orchestration Layer",
+	"properties": {
+		"activities": [
+			{
+				"name": "LKUP_SQLTABLE_WATRMARK DW",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "SqlServerSource",
+						"sqlReaderQuery": "SELECT TableSchema, TableName, WatermarkColumn, LastLoadValue FROM dbo.ADF_Watermark_Table;",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "DS_SSMS_TBLBKP",
+						"type": "DatasetReference"
+					}
+				}
+			}
+		],
+		"folder": {
+			"name": "ABB_Migration"
+		},
+		"annotations": []
+	}
+}
