@@ -24,7 +24,8 @@
 					"dataset": {
 						"referenceName": "DS_SSMS_TBLBKP",
 						"type": "DatasetReference"
-					}
+					},
+					"firstRowOnly": false
 				}
 			}
 		],
