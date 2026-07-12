@@ -127,9 +127,16 @@
 							]
 						},
 						{
-							"name": "Execute Pipeline1",
+							"name": "EXEC_UPDATE",
 							"type": "ExecutePipeline",
-							"dependsOn": [],
+							"dependsOn": [
+								{
+									"activity": "COPYSQL_FULL_INC_LOAD_TABLES",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
 							"policy": {
 								"secureInput": false
 							},
