@@ -1,0 +1,30 @@
+{
+	"name": "DS_SSMS_TBLBKP",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_ABB_SSMS_Vault",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "TableSchema",
+				"type": "varchar"
+			},
+			{
+				"name": "TableName",
+				"type": "varchar"
+			},
+			{
+				"name": "WatermarkColumn",
+				"type": "varchar"
+			},
+			{
+				"name": "LastLoadValue",
+				"type": "bigint",
+				"precision": 19
+			}
+		]
+	}
+}

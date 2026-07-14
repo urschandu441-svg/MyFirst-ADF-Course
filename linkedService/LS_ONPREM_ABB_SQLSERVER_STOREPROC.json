@@ -1,11 +1,11 @@
 {
-	"name": "LS_SSMS_SINK",
+	"name": "LS_ONPREM_ABB_SQLSERVER_STOREPROC",
 	"properties": {
 		"annotations": [],
 		"type": "SqlServer",
 		"typeProperties": {
 			"server": "DESKTOP-U35BAFM\\SQLEXPRESS",
-			"database": "VisionBoardDataMigration",
+			"database": "ABB_DEV_DWH",
 			"encrypt": "optional",
 			"trustServerCertificate": false,
 			"authenticationType": "SQL",
@@ -24,6 +24,5 @@
 			"referenceName": "integrationRuntimeABB",
 			"type": "IntegrationRuntimeReference"
 		}
-	},
-	"type": "Microsoft.DataFactory/factories/linkedservices"
+	}
 }
