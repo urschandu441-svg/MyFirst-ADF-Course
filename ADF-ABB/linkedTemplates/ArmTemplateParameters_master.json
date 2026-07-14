@@ -11,10 +11,10 @@
 		"LS_BLOBTXT_connectionString": {
 			"value": ""
 		},
-		"LS_SSMS_SINK_password": {
+		"LinkService_DL_accountKey": {
 			"value": ""
 		},
-		"LinkService_DL_accountKey": {
+		"SINK_ADLSGEN2_PARQUET_accountKey": {
 			"value": ""
 		},
 		"SqlServer1_password": {
@@ -26,6 +26,15 @@
 		"HttpsTestLink_properties_typeProperties_url": {
 			"value": "https://raw.githubusercontent.com"
 		},
+		"LS_ABB_SSMS_Vault_properties_typeProperties_server": {
+			"value": "DESKTOP-U35BAFM\\SQLEXPRESS"
+		},
+		"LS_ABB_SSMS_Vault_properties_typeProperties_database": {
+			"value": "ABB_DEV_DWH"
+		},
+		"LS_ABB_SSMS_Vault_properties_typeProperties_userName": {
+			"value": "chandu441"
+		},
 		"LS_ADVWORKS_properties_typeProperties_server": {
 			"value": "DESKTOP-U35BAFM\\SQLEXPRESS"
 		},
@@ -33,6 +42,15 @@
 			"value": "AdventureWorks2025"
 		},
 		"LS_ADVWORKS_properties_typeProperties_userName": {
+			"value": "chandu441"
+		},
+		"LS_ONPREM_ABB_SQLSERVER_STOREPROC_properties_typeProperties_server": {
+			"value": "DESKTOP-U35BAFM\\SQLEXPRESS"
+		},
+		"LS_ONPREM_ABB_SQLSERVER_STOREPROC_properties_typeProperties_database": {
+			"value": "ABB_DEV_DWH"
+		},
+		"LS_ONPREM_ABB_SQLSERVER_STOREPROC_properties_typeProperties_userName": {
 			"value": "chandu441"
 		},
 		"LS_RestResource_properties_typeProperties_url": {
@@ -48,6 +66,9 @@
 			"value": "chandu441"
 		},
 		"LinkService_DL_properties_typeProperties_url": {
+			"value": "https://abb2storage.dfs.core.windows.net/"
+		},
+		"SINK_ADLSGEN2_PARQUET_properties_typeProperties_url": {
 			"value": "https://abb2storage.dfs.core.windows.net/"
 		},
 		"SqlServer1_properties_typeProperties_server": {
